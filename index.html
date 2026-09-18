@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="jv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORA - Panyusun Pandonga Krama Inggil</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>.font-serif{font-family:'Crimson Text',Georgia,serif}.font-sans{font-family:'Plus Jakarta Sans',system-ui,sans-serif}</style>
+</head>
+<body class="min-h-screen bg-[#FFFEF9] text-[#2D2A26] font-sans">
+<header class="sticky top-0 z-20 bg-[#FFFEF9]/90 backdrop-blur border-b border-[#C6A96C]/20">
+  <div class="max-w-[1240px] mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-[#7A1C2E] text-white flex items-center justify-center font-serif text-[18px]">†</div>
+      <div><div class="font-serif font-semibold tracking-wide">ORA</div><div class="text-[11px] tracking-[0.15em] uppercase opacity-60 -mt-1">Panyusun Pandonga Katolik • Krama Inggil</div></div>
+    </div>
+    <div class="text-[11px] px-3 py-1 rounded-full bg-[#C6A96C]/15 text-[#8C6A2F]">Karacik miturut Misale Romanum • Kidung Adi • Basa Jawi Alus Murni</div>
+  </div>
+  <div class="max-w-[1240px] mx-auto px-6 pb-3 flex gap-2">
+    <button id="tab-buat" class="px-4 py-2 rounded-full text-[13px] font-medium bg-[#2D2A26] text-white">Ndamel Pandonga</button>
+    <button id="tab-panduan" class="px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20">Pandom Liturgi</button>
+    <button id="tab-koleksi" class="px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20">Kempalan Kula</button>
+  </div>
+</header>
+<main class="max-w-[1240px] mx-auto px-6 py-6">
+  <div id="view-buat" class="grid lg:grid-cols-[420px_1fr] gap-6">
+    <div class="bg-white rounded-[24px] border border-[#C6A96C]/20 shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-6 h-fit lg:sticky lg:top-[110px]">
+      <div class="font-serif text-[18px] font-semibold mb-1">Warna Pandonga</div>
+      <div class="text-[12px] opacity-50 mb-4">Pilih pasamuan ingkang badhe karacik. Basa Jawi Krama Inggil murni, tanpa Indonesia.</div>
+      <div id="jenis-grid" class="grid grid-cols-2 gap-2.5 mb-6"></div>
+      <div class="space-y-4">
+        <div>
+          <label class="text-[11px] uppercase tracking-[0.15em] opacity-50">Kagem Sinten</label>
+          <input id="nama" placeholder="Asma ingkang kawula dongaaken, tld: Ibu Maria" class="mt-1 w-full rounded-xl border border-[#C6A96C]/20 bg-[#FFFEF9] px-4 py-2.5 text-[13px] focus:outline-none focus:border-[#C6A96C]">
+          <textarea id="intensi" placeholder="Ujud / kersa, tld: mugi pinaringan kasarasan" class="mt-2 w-full rounded-xl border border-[#C6A96C]/20 bg-[#FFFEF9] px-4 py-2.5 text-[13px]" rows="2"></textarea>
+        </div>
+        <div id="kontekstual" class="space-y-3 p-3 rounded-xl bg-[#FFFEF9] border border-[#C6A96C]/15"></div>
+        <div class="space-y-3">
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] opacity-50">Dawaning Pandonga - Pilih dawanipun</label>
+            <div class="mt-2 grid grid-cols-3 gap-2" id="panjang-group">
+              <button data-value="pendek" class="panjang-btn rounded-xl border border-[#C6A96C]/20 bg-white px-3 py-2.5 text-center hover:border-[#C6A96C] transition"><div class="text-[12px] font-medium">Cekak</div><div class="text-[10px] opacity-50 leading-tight mt-0.5">1 paragraf<br>enggal</div></button>
+              <button data-value="sedang" class="panjang-btn rounded-xl border bg-[#2D2A26] text-white border-[#2D2A26] px-3 py-2.5 text-center"><div class="text-[12px] font-medium">Sedhengan</div><div class="text-[10px] opacity-70 leading-tight mt-0.5">3-4 paragraf<br>limrah</div></button>
+              <button data-value="panjang" class="panjang-btn rounded-xl border border-[#C6A96C]/20 bg-white px-3 py-2.5 text-center hover:border-[#C6A96C] transition"><div class="text-[12px] font-medium">Panjang</div><div class="text-[10px] opacity-50 leading-tight mt-0.5">5+ paragraf<br>jangkep + ayat</div></button>
+            </div>
+          </div>
+          <div>
+            <label class="text-[11px] uppercase tracking-[0.15em] opacity-50">Gaya Basa - Pilih raosipun</label>
+            <div class="mt-2 grid grid-cols-1 gap-2" id="gaya-group">
+              <button data-value="liturgis" class="gaya-btn rounded-xl border bg-[#2D2A26] text-white border-[#2D2A26] px-4 py-2.5 text-left"><div class="text-[12px] font-medium">Liturgis Resmi</div><div class="text-[10px] opacity-70">Kados Misale Romanum, resmi, baku</div></button>
+              <button data-value="pribadi" class="gaya-btn rounded-xl border border-[#C6A96C]/20 bg-white px-4 py-2.5 text-left hover:border-[#C6A96C]"><div class="text-[12px] font-medium">Pribadi Andhap Asor</div><div class="text-[10px] opacity-50">Caket, anget, kados ngobrol kaliyan Rama</div></button>
+              <button data-value="kitab_suci" class="gaya-btn rounded-xl border border-[#C6A96C]/20 bg-white px-4 py-2.5 text-left hover:border-[#C6A96C]"><div class="text-[12px] font-medium">Meditatif Kitab Suci</div><div class="text-[10px] opacity-50">Kanthi ayat, renungan lebet</div></button>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2"><input type="checkbox" id="tandaSalib" checked class="rounded"><label for="tandaSalib" class="text-[12px]">Wiwiti & pungkasi kanthi Tanda Salib</label></div>
+        <div class="grid grid-cols-2 gap-3">
+          <select id="perantaraan" class="rounded-xl border border-[#C6A96C]/20 bg-white px-3 py-2.5 text-[13px]"><option value="tidak">Pangantaran: Mboten perlu</option><option value="bunda_maria">Ibu Maria</option><option value="yusuf">Santo Yusup</option><option value="pelindung">Santo Pelindung</option><option value="malaikat">Malaekat Pangreksa</option><option value="santo_hari">Santo Dinten Punika</option></select>
+          <input id="namaPelindung" placeholder="Asma Santo" class="rounded-xl border border-[#C6A96C]/20 bg-white px-3 py-2.5 text-[13px]">
+        </div>
+        <button id="btn-generate" class="w-full rounded-full bg-[#7A1C2E] text-white py-3 text-[13px] font-medium">Racik Pandonga Endah</button>
+        <div id="ui-status" class="text-[11px] text-center opacity-60">Sumadya ngracik pandonga</div>
+        <div id="error-box" class="hidden rounded-xl bg-red-50 border border-red-200 p-3 text-[12px] text-red-700"></div>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <div class="rounded-[20px] bg-[#2D2A26] text-white px-5 py-3 flex items-center gap-3"><div class="w-7 h-7 rounded-full bg-[#C6A96C] text-[#2D2A26] flex items-center justify-center text-[14px]">✨</div><div class="text-[12px] leading-relaxed">Mesin variasi liturgis aktif • Saben kaping ngracik medal benten senajan saratipun sami • Basa Jawi Krama Inggil murni adhedhasar Kidung Adi. Rama kawula ing swarga, Asma Dalem kaluhurna...</div></div>
+      <div id="hasil-doa" class="bg-white rounded-[24px] border border-[#C6A96C]/20 shadow-[0_8px_30px_rgba(0,0,0,0.04)] p-7 min-h-[420px]">
+        <div class="text-center py-16"><div class="mx-auto w-16 h-16 rounded-[16px] bg-[#FFFEF9] border border-[#C6A96C]/20 flex items-center justify-center text-[28px] mb-4">🕯️</div><div class="font-serif text-[18px]">Dereng wonten pandonga karacik</div><div class="text-[12px] opacity-50 mt-2 max-w-[320px] mx-auto">Pilih warna pandonga ing kiwa, lajeng pencet Racik Pandonga Endah. Saben kaping racik badhe medal variasi enggal ingkang alus.</div></div>
+      </div>
+    </div>
+  </div>
+  <div id="view-panduan" class="hidden max-w-[900px] mx-auto">
+    <h1 class="font-serif text-[28px] font-semibold">Pandom Nyusun Pandonga ingkang Sae Miturut Misale Romanum</h1>
+    <p class="text-[13px] opacity-60 mt-2">Adhedhasar Kidung Adi, Puji Syukur, lan Ibadat Rosario Jawi</p>
+    <div class="mt-8 space-y-8 text-[13.5px] leading-relaxed">
+      <div class="bg-white rounded-[20px] border border-[#C6A96C]/20 p-6"><div class="font-semibold mb-3">Gangsal Unsur Kolekta</div><div class="grid sm:grid-cols-5 gap-3 text-[12px]"><div class="p-3 rounded-xl bg-[#FFFEF9] border"><b>Pambuka</b><br>Konjuk dhumateng Rama, nyebut Asma Dalem kaluhurna</div><div class="p-3 rounded-xl bg-[#FFFEF9] border"><b>Pangeling-eling</b><br>Ngeling-eling karya Dalem</div><div class="p-3 rounded-xl bg-[#FFFEF9] border"><b>Panyuwun</b><br>Isi pokok panyuwun kanthi andhap asor</div><div class="p-3 rounded-xl bg-[#FFFEF9] border"><b>Kasil</b><br>Supados...</div><div class="p-3 rounded-xl bg-[#FFFEF9] border"><b>Panutup Trinitaris</b><br>Lantaran Sang Kristus</div></div></div>
+      <div class="bg-white rounded-[20px] border border-[#C6A96C]/20 p-6"><div class="font-semibold mb-2">Tuladha Pandonga Jawi ingkang Leres (Kidung Adi No.3)</div><div class="font-serif italic text-[#7A1C2E]">Rama kawula ing swarga, Asma Dalem kaluhurna, Kraton Dalem mugi rawuha. Karsa Dalem kalampahana wonten ing donya kados ing swarga. Kawula nyuwun rejeki kangge sapunika. Sakathahing lepat nyuwun pangapunten Dalem, kados dene anggen kawula ugi ngapunten dhateng sesami. Kawula nyuwun tinebihna saking panggodha, saha linuwarna saking piawon. Amin.</div><div class="mt-4 font-serif italic">Konjuk ing Asma Dalem Hyang Rama saha Hyang Putra tuwin Hyang Roh Suci. Mugi Gusti tansah manunggala, Kaliyan kula sadaya. Gusti kawula ngaturaken raos syukur tuwin atur panuwun, Gusti mugi kersa rawuh ing tengah-tengah kawula saha paring Berkah supados lumempah kanthi lancar lan kidmat, lan andadosna rena ing penggalih Dalem.</div></div>
+    </div>
+  </div>
+  <div id="view-koleksi" class="hidden max-w-[900px] mx-auto"><h1 class="font-serif text-[24px] font-semibold">Kempalan Kula</h1><p class="text-[13px] opacity-50">Pandonga ingkang kasimpen wonten piranti punika.</p><input id="search-koleksi" placeholder="Padosi..." class="mt-4 w-full max-w-[360px] rounded-full border border-[#C6A96C]/20 bg-white px-4 py-2.5 text-[13px]"><div id="koleksi-grid" class="mt-6 grid sm:grid-cols-2 gap-4"></div><div id="koleksi-empty" class="mt-12 bg-white rounded-[24px] border border-[#C6A96C]/20 px-8 py-16 text-center"><div class="mx-auto w-16 h-16 rounded-[16px] bg-[#FFFEF9] border flex items-center justify-center text-[28px] mb-4">🕯️</div><div class="font-serif text-[18px]">Dereng wonten pandonga kasimpen</div></div></div>
+</main>
+<script>
+const jenisList=[
+{key:'buka_pertemuan',label:'Pambuka Pepanggihan',emoji:'📖',desc:'Pambuka pasamuan lingkungan, OMK, APP'},
+{key:'tutup_pertemuan',label:'Panutup Pepanggihan',emoji:'✅',desc:'Panutup pasamuan'},
+{key:'buka_rapat',label:'Pambuka Rembugan',emoji:'🤝',desc:'Pambuka rembugan dewan & panitia'},
+{key:'tutup_rapat',label:'Panutup Rembugan',emoji:'🕊️',desc:'Panutup rembugan'},
+{key:'buka_koor',label:'Pambuka Gladi Pasuwaran',emoji:'🎵',desc:'Sakderenge gladi & ayahan koor'},
+{key:'tutup_koor',label:'Panutup Gladi Pasuwaran',emoji:'🎶',desc:'Sasampunipun gladi'},
+{key:'makan',label:'Boga Dhahar',emoji:'🍞',desc:'Sakderenge & sasampunipun dhahar'},
+{key:'pagi',label:'Enjing',emoji:'🌅',desc:'Wiwitaning dina'},
+{key:'malam',label:'Dalu',emoji:'🌙',desc:'Sakderenge tilem'},
+{key:'ulang_taun',label:'Ambal Warsa',emoji:'🎂',desc:'Panuwun yuswa'},
+{key:'kesembuhan',label:'Kasarasan',emoji:'🕊️',desc:'Nalika nandang gerah'},
+{key:'keluarga',label:'Brayat',emoji:'👨‍👩‍👧‍👦',desc:'Kangge brayat'},
+{key:'pekerjaan',label:'Pakaryan',emoji:'📖',desc:'Sinau & nyambut damel'},
+{key:'perjalanan',label:'Lelampahan',emoji:'✈️',desc:'Karahayon lampah'},
+{key:'bimbingan',label:'Pepadhang',emoji:'🧭',desc:'Nyuwun pitedah'},
+{key:'arwah',label:'Roh Leluhur',emoji:'🕯️',desc:'Kangge roh ingkang sumare'},
+{key:'syukur',label:'Panuwun',emoji:'🙏',desc:'Atur panuwun'},
+{key:'tobat',label:'Pamratobat',emoji:'💜',desc:'Pangapunten'},
+];
+const sapaanPool={
+liturgis:["Dhuh Rama ingkang Maha Asih saha Maha Kwasa,","Gusti Allah Rama ingkang Maha Mirah, sumbering sedaya sih rahmat,","Dhuh Hyang Rama ingkang Maha Luhur, ingkang nitah saha ngrimat gesang,","Rama ingkang kebak karahiman, ingkang mboten nate nilar abdi Dalem,","Gusti Allah ingkang Maha Asih tuwin langgeng,"],
+pribadi:["Dhuh Rama ingkang kinasih, ingkang tansah wonten ing gesang kawula,","Rama ingkang kawula tresnani saha kawula ngantu-antu,","Gusti Yesus, Gusti saha mitra sejati kawula,","Rama, Paduka ingkang nguningani manah kawula langkung lebet,","Gusti Yesus ingkang setya nunggil lampah kawula,"],
+kitab_suci:["Dhuh Rama, Paduka sumbering sedaya kabecikan saha sih setya,","Dhuh Gusti, Paduka pepadhang saha karahayon kawula,","Rama ingkang ngandika lan sedaya tumitah,","Gusti Allah ingkang sih setya Paduka ngungkuli akasa,","Dhuh Rama, wonten ing Paduka kawula gesang, obah, saha wonten,"]
+};
+const anamnesisPool={
+makan:["ingkang kanthi sih wilasa Paduka nuwuhaken wohing bumi saha paring rejeki kangge kawula,","ingkang paring berkah pakaryaning asta saha ngluberahken boga kangge ngenyangaken kawula,","ingkang kanthi pangrimatan Dalem nyawisaken tetedhan saking kaluberaning titah Dalem,","ingkang tansah ngabikak asta Dalem kanthi loma kangge gesang kawula,"],
+pagi:["ingkang wunguaken kawula saking tilem, nganyaraken sih setya Paduka saben enjing,","ingkang ngicalaken pepeteng dalu saha nimbali kawula dhumateng pepadhang sih Dalem,","ingkang kanthi embun enjing nyegeraken nyawa kawula,","ingkang setya njagi kawula sadangunipun dalu,"],
+malam:["ingkang nunggil kawula sadinten punika saha ngayomi kawula kanthi tentrem Dalem nalika dalu,","ingkang dados pangreksa kawula ingkang mboten nate sare,","ingkang ngleremaken sayahing nyawa kawula,","ingkang nutup dina kanthi sih Dalem,"],
+ulang_taun:["sumbering sedaya gesang, ingkang kanthi sih setya paring ambegan, wekdal, saha wuwuhing yuswa,","ingkang nenun gesang kawula wiwit guwa garba,","ingkang kanthi loma nglipat gandakaken yuswa,","ingkang dados Alfa saha Omega,"],
+kesembuhan:["Gusti Juru Jampi Agung ingkang kebak sih wilasa, ingkang mirsani kasangsaran kawula,","ingkang ndemok ingkang nandang gerah kanthi asta Dalem,","ingkang mboten maiben panyuwuning tiyang ingkang remuk manahipun,","ingkang kanthi bilur-bilur Putra Dalem sampun nyarasaken,"],
+keluarga:["Gusti Allah Rama, wiwitan saha tuladha sedaya brayat,","ingkang manunggalaken kawula wonten ing talining katresnan,","ingkang mulang kasetyan lumantar brayat Suci Nasaret,","ingkang kanthi sih Dalem ngrimat saben brayat,"],
+pekerjaan:["Rama ingkang makarya tanpo kendhat,","ingkang paring berkah pakaryaning asta kawula,","ingkang masrahaken talenta dhumateng kawula,","ingkang mirsani katulusan pakaryan kawula,"],
+perjalanan:["Gusti Allah ingkang nunggil umat Dalem wonten ing saben lelampahan,","ingkang dados panuntun wonten ing ara-ara,","ingkang njagi lampah suku kawula,","ingkang rawuh minangka mitra lelampahan,"],
+bimbingan:["Gusti Allah sumbering kawicaksanan, ingkang mbimbing lampah kawula,","ingkang nirusngi pepeteng karaguan kawula,","ingkang ngikik alus wonten ing manah nurani,","ingkang mboten nilar menda Dalem kesah tanpa tuntunan,"],
+arwah:["Gusti Allah Rama sumbering gesang langgeng, ingkang ngasoraken pejah lumantar wungunipun Putra Dalem,","ingkang nimbali saben nyawa wangsul,","ingkang ngusap luh duka,","ingkang mbikak gapuraning karahiman Dalem,"],
+syukur:["Gusti Allah Rama ingkang loma, ingkang ngluberahken berkah Dalem,","ingkang kanthi asta ngabikak ngucuraken kabecikan,","ingkang ngowahi tangis dados kabingahan,","ingkang wonten ing suka tuwin duka tetep setya,"],
+tobat:["Gusti Allah Rama ingkang Maha Mirah, ingkang mboten nate sayah ngapunten,","ingkang ngantos wangsulipun kawula kados Rama ngantos putra ingkang ical,","ingkang kanthi rah Putra Dalem sampun ngicalaken utang dosa,","ingkang kanthi alus ngumbah manah kawula,"],
+buka_pertemuan:["ingkang ngandika, wonten pundi kalih utawi tiga sami kempal wonten ing asma Dalem, wonten ngriku Dalem rawuh,","ingkang ngempalaken kawula minangka kulawarga Dalem,","ingkang paring Roh Kawicaksanan,","ingkang manunggalaken kawula wonten ing setunggal kapitadosan,"],
+tutup_pertemuan:["ingkang sampun nunggil pasamuan kawula saha nyebar wiji Sabda Dalem,","ingkang paring berkah saben wawan pangandika,","ingkang setya ndherek Gereja Dalem ingkang peziarah,","ingkang dadosaken pepanggihan pratanda rawuhipun Kraton Dalem,"],
+buka_rapat:["ingkang paring cipta lan manah saha kawicaksanan,","ingkang nimbali kawula dados bendahara setya,","ingkang kanthi Roh Suci nirusngi rembugan,","ingkang ngersakaken sedaya katata kanthi sae,"],
+tutup_rapat:["ingkang sampun mbimbing lampahing rembugan,","ingkang ngiket putusan wonten ing katresnan,","ingkang setya nunggil Gereja Dalem,","ingkang ngersakaken tentrem dados wohing rembugan,"],
+buka_koor:["ingkang paring talenta swara kangge ngluhuraken asma Dalem,","ingkang lenggah wonten ing sainggiling pamuji umat Dalem,","ingkang kanthi kidunging para malaekat ngajak kawula ngidungaken,","ingkang dadosaken kidung minangka pandonga arum,"],
+tutup_koor:["ingkang sampun paring berkah gladi kawula,","ingkang nampi pisungsung swara ingkang prasaja ananging tulus,","ingkang sampun manunggalaken swara wonten ing harmoni katresnan,","ingkang karsa dhumateng pamuji kangge liturgi suci,"],
+};
+const buahPool={
+makan:["supados kawula kakiyataken kangge andum rejeki dhateng sesami ingkang kekurangan saha tansah ngaturaken panuwun","supados tetedhan ngiyataken raga tuwin nyawa","supados kawula sansaya peka dhumateng kaluwenan sesami","supados lumantar rejeki punika kawula ngluhuraken Paduka"],
+pagi:["supados dinten punika dados pisungsung gesang","supados saben lampah mancaraken sih Dalem","supados kawula mempeng wonten ing kabecikan","supados bingah lan duhkita kawula lampahi sesarengan Paduka"],
+malam:["supados kawula ngaso wonten ing tentrem Dalem","supados dalu dados pangkuan sih Dalem","supados wonten ing tilem kawula tetep wonten ing pangayoman malaekat","supados enjing wungu kanthi manah enggal"],
+ulang_taun:["supados taun-taun dados berkah","supados sansaya nirus Putra Dalem","supados yuswa dados kidung panuwun","supados Paduka tuntun tumuju kaluberaning gesang"],
+kesembuhan:["supados dipun pulihaken kanthi wutuh","supados gerah dados margi kasucen","supados Paduka angkat saking karingkihan","supados kapitadosan sansaya kukuh"],
+keluarga:["supados brayat tuwuh wonten ing kasetyan","supados griya dados papan Sabda Dalem","supados katresnan ngoyod kukuh kados Nasaret","supados sami sinangga wonten ing bingah lan duhkita"],
+pekerjaan:["supados pakaryan dados margi kasucen","supados pakaryan dados berkah","supados talenta tuwuh awoh","supados sayah Paduka tingali"],
+perjalanan:["supados lelampahan wilujeng","supados Paduka tebihaken saking bebaya","supados dumugi papan tujuwan kanthi wilujeng","supados saben tindak Paduka kawal"],
+bimbingan:["supados wantun mlampah wonten ing pepadhang Dalem","supados manah bening saged mirengaken wisiking Roh Suci","supados mboten ajrih","supados karsa Dalem ingkang kalampahan"],
+arwah:["supados kepareng ningali wedhanan Dalem","supados katampi wonten ing pepadhang langgeng","supados karesikan saking rereged","supados gesang wonten ing tentrem Dalem"],
+syukur:["supados manah sansaya andhap asor","supados panuwun mboten namung wonten ing lathi","supados sansaya ngraosaken agenging sih Dalem","supados berkah tikel kaping-kaping"],
+tobat:["supados kaluwaran saking belengguning dosa","supados manah ingkang atos Paduka lembataken","supados wungu saking karubuhan","supados sih karahiman mulihaken tatu batos"],
+buka_pertemuan:["supados pepanggihan awoh pangertosan","supados pasamuan kanthi andhap asor","supados dados margi tuwuhing pasedherekan","supados pikantuk pepadhang"],
+tutup_pertemuan:["supados wohing pepanggihan kabekta wangsul","supados Paduka paringi kekiyatan","supados wangsul kanthi manah kebak tentrem","supados dados wiwitaning pakaryan katresnan"],
+buka_rapat:["supados rembugan lumampah lancar, wicaksana","supados saben pamikir dipun timbang kanthi wening","supados pambudidaya manunggal kalian karsa Dalem","supados awoh putusan ingkang adil"],
+tutup_rapat:["supados putusan kalampahan kanthi setya","supados mboten namung wonten ing serat","supados wangsul kanthi semangat enggal","supados dipun tutup kanthi Berkah Dalem"],
+buka_koor:["supados gladi lancar, swara selaras","supados swara manunggal dados kidung endah","supados dirigen Paduka paringi kawicaksanan","supados kalampahan kanthi bingah"],
+tutup_koor:["supados dados pisungsung arum","supados wangsul kanthi wilujeng","supados kekurangan Paduka sampurnakaken","supados awoh ayahan liturgi ingkang kidmat"],
+};
+const penghubungPool=["Awit saking punika,","Kanthi andhap asor abdi Dalem munjuk,","Wonten ing sih karahiman Dalem,","Awit punika,","Kanthi pangajeng-ajeng ingkang ageng,","Pramila abdi Dalem sesambat dhumateng Paduka,","Wonten ing ngarsanipun dhampar Dalem,","Kanthi kapitadosan ingkang kukuh,","Wonten ing pangrimatan Dalem ingkang kebak sih,"];
+const elaborasiPool=["Paduka nguningani lebeting manah kawula langkung lebet tinimbang kawula nguningani manah kawula piyambak.","Sih setya Dalem ngungkuli sedaya karingkihan saha winatesan kawula.","Wonten ing saben ambegan, Paduka rawuh saha ngrimat kawula kanthi alus.","Paduka mboten nate sayah mirengaken wisiking pandonga kawula."];
+const penyerahanPool=["Kanthi andhap asor, kawula pasrahaken sedaya pangajeng-ajeng punika wonten ing pangrimatan sih Dalem, supados karsa Dalem ingkang kalampahan.","Kawula pasrahaken samukawis wonten ing astanipun Dalem ingkang kebak kwasa saha sih wilasa.","Mugi tentrem Dalem ingkang ngungkuli sedaya akal njagi manah saha budi kawula.","Kawula pitados, Paduka mirengaken langkung langkung tinimbang ingkang saged kawula aturaken."];
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function pickDiff(a,p){if(a.length<=1)return a[0];let r,c=0;do{r=pick(a);c++;if(c>10)break;}while(r===p);return r;}
+let currentJenis='buka_pertemuan';let currentPanjang='sedang';let currentGaya='liturgis';let variationCount=1;let lastTeks=null;let koleksi=[];
+
+function setupButtonGroups(){
+  document.querySelectorAll('.panjang-btn').forEach(btn=>{
+    btn.onclick=()=>{
+      currentPanjang=btn.dataset.value;
+      document.querySelectorAll('.panjang-btn').forEach(b=>{b.className='panjang-btn rounded-xl border border-[#C6A96C]/20 bg-white px-3 py-2.5 text-center hover:border-[#C6A96C] transition';});
+      btn.className='panjang-btn rounded-xl border bg-[#2D2A26] text-white border-[#2D2A26] px-3 py-2.5 text-center';
+    };
+  });
+  document.querySelectorAll('.gaya-btn').forEach(btn=>{
+    btn.onclick=()=>{
+      currentGaya=btn.dataset.value;
+      document.querySelectorAll('.gaya-btn').forEach(b=>{b.className='gaya-btn rounded-xl border border-[#C6A96C]/20 bg-white px-4 py-2.5 text-left hover:border-[#C6A96C]';});
+      btn.className='gaya-btn rounded-xl border bg-[#2D2A26] text-white border-[#2D2A26] px-4 py-2.5 text-left';
+    };
+  });
+}
+
+
+function renderJenis(){const grid=document.getElementById('jenis-grid');grid.innerHTML='';jenisList.forEach(j=>{const b=document.createElement('button');b.className=`text-left p-3 rounded-xl border text-[12px] ${currentJenis===j.key?'bg-[#7A1C2E] text-white border-[#7A1C2E]':'bg-[#FFFEF9] border-[#C6A96C]/20 hover:border-[#C6A96C]'}`;b.innerHTML=`<div class="flex items-center gap-2"><span>${j.emoji}</span><span class="font-medium">${j.label}</span></div><div class="opacity-70 mt-1 leading-tight">${j.desc}</div>`;b.onclick=()=>{currentJenis=j.key;renderJenis();renderKontekstual();setupButtonGroups();};grid.appendChild(b);});}
+function renderKontekstual(){const box=document.getElementById('kontekstual');let html='';if(['makan'].includes(currentJenis)){html+=`<select id="waktuMakan" class="w-full rounded-xl border border-[#C6A96C]/20 bg-white px-3 py-2 text-[12px]"><option>Enjing</option><option>Siang</option><option>Dalu</option><option>Bersama keluarga besar</option></select>`;}if(['ulang_taun'].includes(currentJenis)){html+=`<div class="grid grid-cols-2 gap-2"><input id="usia" placeholder="Yuswa" class="rounded-xl border px-3 py-2 text-[12px]"><input id="sifatHarapan" placeholder="Pangajeng" class="rounded-xl border px-3 py-2 text-[12px]"></div>`;}if(['kesembuhan'].includes(currentJenis)){html+=`<input id="kondisi" placeholder="Kahanan" class="w-full rounded-xl border px-3 py-2 text-[12px]">`;}if(['perjalanan'].includes(currentJenis)){html+=`<input id="tujuan" placeholder="Tujuwan" class="w-full rounded-xl border px-3 py-2 text-[12px]">`;}if(['pekerjaan'].includes(currentJenis)){html+=`<input id="profesi" placeholder="Pakaryan" class="w-full rounded-xl border px-3 py-2 text-[12px]">`;}if(currentJenis.includes('buka')||currentJenis.includes('tutup')){html+=`<input id="namaAcara" placeholder="Asma Adicara, tld: Pepanggihan Lingkungan" class="w-full rounded-xl border px-3 py-2 text-[12px]"><div class="grid grid-cols-2 gap-2"><input id="temaAcara" placeholder="Tema" class="rounded-xl border px-3 py-2 text-[12px]"><select id="jenisAcaraDetail" class="rounded-xl border px-3 py-2 text-[12px]"><option>Lingkungan</option><option>Wilayah</option><option>OMK</option><option>Dewan Paroki</option><option>Panitia</option><option>Gladi Pasuwaran</option><option>Umum</option></select></div>`;}box.innerHTML=html||`<div class="text-[11px] opacity-50">Mboten wonten isian tambahan</div>`;}
+function generateDoa(){
+  const nama=document.getElementById('nama').value.trim();
+  const intensi=document.getElementById('intensi').value.trim();
+  const panjang=currentPanjang;
+  const gaya=currentGaya;
+  const jenisAcaraDetail=document.getElementById('jenisAcaraDetail')?.value||'';
+  const tandaSalib=document.getElementById('tandaSalib').checked;
+  const perantaraan=document.getElementById('perantaraan').value;
+  const namaPelindung=document.getElementById('namaPelindung').value.trim();
+  const waktuMakan=document.getElementById('waktuMakan')?.value||'Enjing';
+  const usia=document.getElementById('usia')?.value||'';
+  const sifatHarapan=document.getElementById('sifatHarapan')?.value||'';
+  const kondisi=document.getElementById('kondisi')?.value||'';
+  const tujuan=document.getElementById('tujuan')?.value||'';
+  const profesi=document.getElementById('profesi')?.value||'';
+  const namaAcara=document.getElementById('namaAcara')?.value||'';
+  const temaAcara=document.getElementById('temaAcara')?.value||'';
+  const sapaan=pick(sapaanPool[gaya]);
+  const anamnesis=pick(anamnesisPool[currentJenis]);
+  const buah=pick(buahPool[currentJenis]);
+  const peng1=pick(penghubungPool);
+  const peng2=pickDiff(penghubungPool,peng1);
+  const elaborasi=pick(elaborasiPool);
+  const penyerahan=pick(penyerahanPool);
+  const berkat=["mugi karsa paring berkah","mugi karsa nyucekaken","mugi karsa nglimpahaken rahmat Dalem dhumateng"];
+  const mohon=["Kawula nyuwun","Abdi Dalem munjuk","Kawula ngaturaken panyuwun"];
+  const isPribadi=gaya==='pribadi'&&!nama;
+  function petisi(){
+    const pron=isPribadi?pick(["Kawula nyuwun","Abdi Dalem munjuk"]):pick(mohon);
+    const sub=isPribadi?"kawula":"kawula sadaya";
+    const vb=pick(berkat);
+    const ac=namaAcara;
+    switch(currentJenis){
+      case 'makan':return `${pron} ${vb} tetedhan tuwin unjukan ingkang badhe ${sub} dhahar wonten ing wekdal ${waktuMakan.toLowerCase()}, supados dados kakiyatan`;
+      case 'pagi':return `${pron} nunggila lampah ${sub} sadangunipun dinten punika`;
+      case 'malam':return `${pron} ayomia ${sub} wonten ing palereman dalu punika`;
+      case 'ulang_taun':return `${pron} ${vb} ${nama||sub} ingkang jangkep ${usia} taun, supados sansaya ${sifatHarapan||'wicaksana'}`;
+      case 'kesembuhan':return `${pron} jamaha ${nama||'sadherek kawula'} ingkang nandang ${kondisi||'gerah'}`;
+      case 'keluarga':return `${pron} sucikna brayat ${sub}`;
+      case 'pekerjaan':return `${pron} ${vb} pakaryan ${sub} minangka ${profesi||'abdi Dalem'}`;
+      case 'perjalanan':return `${pron} nunggila lelampahan ${nama||sub} ${tujuan?'tumuju '+tujuan:''}`;
+      case 'bimbingan':return `${pron} padhangia budi ${sub} ingkang kalimputan karaguan`;
+      case 'arwah':return `${pron} paringa palereman langgeng dhumateng ${nama||'nyawa ingkang kinasih'}`;
+      case 'syukur':return `${pron} tampia panuwun ${sub} awit berkah Dalem`;
+      case 'tobat':return `${pron} ngapuntena dosa ${sub}`;
+      case 'buka_pertemuan':return `${pron} paring berkah pepanggihan ${ac||'punika'} ${temaAcara?'kanthi tema '+temaAcara:''}`;
+      case 'tutup_pertemuan':{ let t=`${pron} ngaturaken agenging panuwun awit pasamuan ${ac||'punika'}`; if(jenisAcaraDetail) t+=` ${jenisAcaraDetail}`; if(temaAcara) t+=` kanthi tema ${temaAcara}`; return t; }
+      case 'buka_rapat':{ let t=`${pron} paring berkah rembugan ${ac||'punika'}`; if(jenisAcaraDetail) t+=` ${jenisAcaraDetail}`; if(temaAcara) t+=` kanthi tema ${temaAcara}`; return t; }
+      case 'tutup_rapat':{ let t=`${pron} ngaturaken panuwun awit rembugan ${ac||'punika'}`; if(jenisAcaraDetail) t+=` ${jenisAcaraDetail}`; return t; }
+      case 'buka_koor':return `${pron} paring berkah gladi pasuwaran ${ac||'punika'}, paring Roh Suci`;
+      case 'tutup_koor':return `${pron} ngaturaken panuwun awit gladi dalu punika`;
+      default:return `${pron} mirengaken pandonga kawula`;
+    }
+  }
+  const pet=petisi();
+  let namaIntensi='';
+  if(nama&&intensi) namaIntensi=`Mliginipun kawula ngaturaken pandonga kagem ${nama} ingkang kinasih, kanthi pangajeng-ajeng ${intensi}.`;
+  else if(nama) namaIntensi=`Mliginipun kawula ndongaaken ${nama} ingkang kinasih wonten ing ngarsa Dalem.`;
+  else if(intensi) namaIntensi=`Kanthi andhap asor kawula mbekta ujud punika: ${intensi}.`;
+  const perMap={tidak:'',bunda_maria:'Mawi pangantaring Ibu Maria,',yusuf:'Mawi pangantaring Santo Yusup,',pelindung:namaPelindung?`Mawi pangantaring Santo ${namaPelindung},`:'Mawi pangantaring Santo pelindung,',malaikat:'Mawi pangantaring Malaekat Pangreksa,',santo_hari:'Mawi pangantaring para suci Dalem,'};
+  const penutup={
+    pendek:'Lantaran Sang Kristus, Gusti kawula. Amin.',
+    sedang:'Lantaran Sang Kristus, Gusti kawula, sapunika sarta ing salami-laminipun. Amin.',
+    panjang:'Lumantar Sang Kristus, Putra Dalem, ingkang sareng Panjenengan Dalem lan Hyang Roh Suci, gesang lan mengku keprabon, sapunika sarta ing salami-laminipun. Amin.'
+  };
+  let paras=[];
+  if(tandaSalib) paras.push('† Konjuk ing Asma Dalem Hyang Rama saha Hyang Putra tuwin Hyang Roh Suci. Amin.');
+  if(panjang==='pendek'){
+    let p=`${sapaan} ${anamnesis} ${elaborasi}`;
+    if(namaIntensi) p+=` ${namaIntensi}`;
+    if(temaAcara) p+=` Kanthi tema ${temaAcara},`;
+    if(jenisAcaraDetail) p+=` kangge ${jenisAcaraDetail},`;
+    p+=` ${peng1} ${pet.charAt(0).toLowerCase()+pet.slice(1)} ${buah}.`;
+    paras.push(p);
+    if(perMap[perantaraan]) paras.push(`${perMap[perantaraan]} ${peng2.toLowerCase()} kawula pasrahaken pandonga punika kanthi andhap asor.`);
+    paras.push(penutup.pendek);
+  } else if(panjang==='sedang'){
+    paras.push(`${sapaan} ${anamnesis} ${elaborasi}`);
+    let petisiBlock = `${namaIntensi?namaIntensi+' ':''}${peng1} ${pet.charAt(0).toLowerCase()+pet.slice(1)} ${buah}.`;
+    if(temaAcara) petisiBlock += ` Mliginipun kanthi tema ${temaAcara}.`;
+    if(jenisAcaraDetail) petisiBlock += ` Kangge pasamuan ${jenisAcaraDetail} punika.`;
+    if(namaAcara) petisiBlock += ` Asma adicara ${namaAcara}.`;
+    paras.push(petisiBlock);
+    paras.push(penyerahan);
+    if(perMap[perantaraan]) paras.push(`${perMap[perantaraan]} ${peng2.toLowerCase()} kawula pasrahaken pandonga.`);
+    paras.push(penutup.sedang);
+  } else {
+    paras.push(`${sapaan} ${anamnesis} ${elaborasi} Wonten ing sih setya Dalem ingkang tanpo kendhat, Paduka ngrimat karya astanipun Dalem.`);
+    if(namaAcara || temaAcara || jenisAcaraDetail){
+      let konteksInfo = `Pasamuan punika`;
+      if(namaAcara) konteksInfo += ` aran ${namaAcara}`;
+      if(jenisAcaraDetail) konteksInfo += `, saking ${jenisAcaraDetail}`;
+      if(temaAcara) konteksInfo += `, kanthi tema ${temaAcara}`;
+      konteksInfo += `, kawula aturaken wonten ing ngarsa Dalem.`;
+      paras.push(konteksInfo);
+    }
+    paras.push(`Kados Sabda Dalem: “Wonten pundi kalih utawi tiga kempal wonten ing asma Dalem, wonten ngriku Dalem rawuh.”`);
+    let petisiPanjang = `${namaIntensi?namaIntensi+' ':''}${peng1} ${pet.toLowerCase()}. ${peng2} ${buah}.`;
+    if(temaAcara) petisiPanjang += ` Mugi tema ${temaAcara} dados pepadhang kangge lampah kawula.`;
+    paras.push(petisiPanjang);
+    if(perMap[perantaraan]) paras.push(`${perMap[perantaraan]} kawula munjuk kanthi kapitadosan kebak, mugi Paduka karsa mirengaken saha nglulusaken pandonga miturut kawicaksanan karsa Dalem.`);
+    else paras.push(penyerahan);
+    paras.push(penutup.panjang);
+  }
+  if(tandaSalib) paras.push('† Amin.');
+  return {judul: jenisList.find(j=>j.key===currentJenis).label + (nama?` kagem ${nama}`:namaAcara?` - ${namaAcara}`:''), teks: paras.join('\n\n'), paras};
+}
+function renderHasil(data,isVar){
+  const el=document.getElementById('hasil-doa');
+  const varLabel=isVar?`<div class="text-[10px] px-2 py-1 rounded-full bg-[#C6A96C]/20 inline-block mb-2">Variasi kaping-${variationCount}</div>`:'';
+  const parasHtml=data.paras.map(p=>`<p class="mb-4 leading-relaxed">${p}</p>`).join('');
+  el.innerHTML=`${varLabel}<div class="flex items-start justify-between gap-3 mb-4"><h2 class="font-serif text-[20px] font-semibold text-[#7A1C2E]">${data.judul}</h2><span class="text-[10px] px-2 py-1 rounded-full bg-[#C6A96C]/15">${jenisList.find(j=>j.key===currentJenis).emoji} ${jenisList.find(j=>j.key===currentJenis).label}</span></div><div class="font-serif text-[15px] leading-[1.85]">${parasHtml}</div><div class="mt-6 flex flex-wrap gap-2"><button id="btn-var" class="rounded-full border border-[#C6A96C] px-4 py-2 text-[12px]">Variasekaken Malih ✨</button><button id="btn-copy" class="rounded-full bg-[#2D2A26] text-white px-4 py-2 text-[12px]">Salin</button><button id="btn-save" class="rounded-full border px-4 py-2 text-[12px]">Simpen</button><button id="btn-wa" class="rounded-full border px-4 py-2 text-[12px]">Bagikaken WA</button></div>`;
+  document.getElementById('btn-var').onclick=()=>handleGenerate(true);
+  document.getElementById('btn-copy').onclick=()=>{navigator.clipboard.writeText(data.judul+'\n\n'+data.teks);};
+  document.getElementById('btn-save').onclick=()=>{koleksi.unshift({id:Date.now().toString(),judul:data.judul,teks:data.teks,tanggal:new Date().toLocaleDateString('jv-JW'),jenis:currentJenis});try{localStorage.setItem('ora_koleksi_jawa',JSON.stringify(koleksi));}catch{};renderKoleksi();};
+  document.getElementById('btn-wa').onclick=()=>{const txt=encodeURIComponent(`*${data.judul}*\n\n${data.teks}`);window.open(`https://wa.me/?text=${txt}`,'_blank');};
+}
+function handleGenerate(isVar){
+  const btn=document.getElementById('btn-generate');btn.textContent='Tengah ngracik...';btn.disabled=true;
+  setTimeout(()=>{try{let res,tries=0;do{res=generateDoa();tries++;}while(lastTeks&&res.teks===lastTeks&&tries<8);lastTeks=res.teks;if(isVar)variationCount++;else variationCount=1;renderHasil(res,isVar);}catch(e){document.getElementById('error-box').textContent='Kalepatan: '+e;document.getElementById('error-box').classList.remove('hidden');}finally{btn.textContent='Racik Pandonga Endah';btn.disabled=false;}},300);
+}
+function renderKoleksi(){
+  const q=(document.getElementById('search-koleksi')?.value||'').toLowerCase();
+  const grid=document.getElementById('koleksi-grid');
+  const empty=document.getElementById('koleksi-empty');
+  const filtered=koleksi.filter(k=>k.judul.toLowerCase().includes(q)||k.teks.toLowerCase().includes(q));
+  if(filtered.length===0){grid.innerHTML='';empty.classList.remove('hidden');return;}
+  empty.classList.add('hidden');grid.innerHTML='';
+  filtered.forEach(item=>{
+    const d=document.createElement('div');d.className='bg-white rounded-[20px] border p-5';d.innerHTML=`<div class="font-serif font-semibold text-[#7A1C2E]">${item.judul}</div><div class="text-[11px] opacity-50 mt-1">${item.tanggal}</div><div class="text-[12px] mt-3 line-clamp-3 font-serif opacity-70">${item.teks.slice(0,180)}...</div><div class="mt-3 flex gap-2"><button class="flex-1 rounded-full bg-[#2D2A26] text-white py-1.5 text-[11px]">Bikak</button><button class="rounded-full border px-3 py-1.5 text-[11px]">Busek</button></div>`;
+    d.querySelectorAll('button')[0].onclick=()=>{currentJenis=item.jenis;renderJenis();renderKontekstual();setupButtonGroups();document.getElementById('hasil-doa').innerHTML=`<div class="font-serif text-[18px] font-semibold text-[#7A1C2E] mb-3">${item.judul}</div><div class="font-serif leading-relaxed">${item.teks.split('\n\n').map(p=>`<p class='mb-3'>${p}</p>`).join('')}</div>`;document.getElementById('view-buat').classList.remove('hidden');document.getElementById('view-koleksi').classList.add('hidden');document.getElementById('view-panduan').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'});};
+    d.querySelectorAll('button')[1].onclick=()=>{koleksi=koleksi.filter(k=>k.id!==item.id);try{localStorage.setItem('ora_koleksi_jawa',JSON.stringify(koleksi));}catch{};renderKoleksi();};
+    grid.appendChild(d);
+  });
+}
+document.getElementById('btn-generate').onclick=()=>handleGenerate(false);
+document.getElementById('tab-buat').onclick=()=>{document.getElementById('view-buat').classList.remove('hidden');document.getElementById('view-panduan').classList.add('hidden');document.getElementById('view-koleksi').classList.add('hidden');document.getElementById('tab-buat').className='px-4 py-2 rounded-full text-[13px] font-medium bg-[#2D2A26] text-white';document.getElementById('tab-panduan').className='px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20';document.getElementById('tab-koleksi').className='px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20';};
+document.getElementById('tab-panduan').onclick=()=>{document.getElementById('view-buat').classList.add('hidden');document.getElementById('view-panduan').classList.remove('hidden');document.getElementById('view-koleksi').classList.add('hidden');document.getElementById('tab-buat').className='px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20';document.getElementById('tab-panduan').className='px-4 py-2 rounded-full text-[13px] font-medium bg-[#2D2A26] text-white';document.getElementById('tab-koleksi').className='px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20';};
+document.getElementById('tab-koleksi').onclick=()=>{document.getElementById('view-buat').classList.add('hidden');document.getElementById('view-panduan').classList.add('hidden');document.getElementById('view-koleksi').classList.remove('hidden');document.getElementById('tab-buat').className='px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20';document.getElementById('tab-panduan').className='px-4 py-2 rounded-full text-[13px] font-medium border border-[#C6A96C]/20';document.getElementById('tab-koleksi').className='px-4 py-2 rounded-full text-[13px] font-medium bg-[#2D2A26] text-white';renderKoleksi();};
+document.getElementById('search-koleksi')?.addEventListener('input',renderKoleksi);
+try{const s=localStorage.getItem('ora_koleksi_jawa');if(s)koleksi=JSON.parse(s);}catch{}
+renderJenis();renderKontekstual();setupButtonGroups();
+</script>
+</body>
+</html>
